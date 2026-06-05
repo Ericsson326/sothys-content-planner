@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SOTHYS 月度内容策划生成器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel" aria-label="内容策划设置">
+        <div class="brand-block">
+          <div>
+            <p class="eyebrow">SOTHYS Setia City Mall</p>
+            <h1>月度内容策划生成器</h1>
+          </div>
+          <div class="brand-mark" aria-label="SOTHYS Paris">SOTHYS<br /><span>PARIS</span></div>
+        </div>
+
+        <form class="planner-form" id="plannerForm">
+          <label>
+            月份
+            <input id="monthInput" type="month" value="2026-06" />
+          </label>
+
+          <label>
+            主要活动
+            <select id="campaignInput"></select>
+          </label>
+
+          <label>
+            发帖频率
+            <select id="frequencyInput">
+              <option value="daily">每天发布</option>
+              <option value="weekday">只发工作日</option>
+              <option value="three">每周 3 篇</option>
+            </select>
+          </label>
+
+          <label>
+            品牌重点
+            <textarea id="focusInput" rows="4">提升新顾客预约，推广专业 facial treatment，并突出高级、干净、可信赖的护肤体验。</textarea>
+          </label>
+
+          <section class="library-panel" aria-label="内容库">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">Editable Library</p>
+                <h2>内容库</h2>
+              </div>
+              <button class="mini-button" id="newItemButton" type="button">New</button>
+            </div>
+            <p class="sync-status" id="syncStatus">正在检查保存状态...</p>
+
+            <div class="library-form">
+              <label>
+                产品 / 活动名称
+                <input id="itemNameInput" type="text" placeholder="例如：Hydrating Facial" />
+              </label>
+
+              <label>
+                主标题
+                <input id="itemTitleInput" type="text" placeholder="例如：Glow Hydration Facial" />
+              </label>
+
+              <label>
+                副标题
+                <textarea id="itemSubtitleInput" rows="3" placeholder="例如：Deep hydration treatment for smoother, healthier-looking skin."></textarea>
+              </label>
+
+              <div class="two-col">
+                <label>
+                  CTA
+                  <input id="itemCtaInput" type="text" placeholder="例如：Book Your Treatment Today" />
+                </label>
+
+                <label>
+                  价格 / 备注
+                  <input id="itemPriceInput" type="text" placeholder="例如：From RM273" />
+                </label>
+              </div>
+
+              <label>
+                内容角度
+                <textarea id="itemAnglesInput" rows="4" placeholder="一行一个角度，例如：&#10;Hydration benefit&#10;Dry skin concern&#10;Treatment room experience"></textarea>
+              </label>
+
+              <label>
+                视觉方向
+                <textarea id="itemVisualInput" rows="3" placeholder="例如：Bright cream background, premium facial treatment photo, clean CTA button."></textarea>
+              </label>
+
+              <button class="secondary-button" id="saveItemButton" type="button">保存到内容库</button>
+            </div>
+
+            <div class="library-list" id="libraryList"></div>
+          </section>
+
+          <fieldset>
+            <legend>渠道</legend>
+            <label class="check-row"><input type="checkbox" name="channel" value="Instagram Feed" checked />Instagram Feed</label>
+            <label class="check-row"><input type="checkbox" name="channel" value="Facebook Ad" checked />Facebook Ad</label>
+            <label class="check-row"><input type="checkbox" name="channel" value="Reels" checked />Reels</label>
+            <label class="check-row"><input type="checkbox" name="channel" value="Stories" />Stories</label>
+          </fieldset>
+
+          <div class="action-row">
+            <button class="primary-button" type="submit">生成内容日历</button>
+            <button class="icon-button" id="copyButton" type="button" title="复制内容">Copy</button>
+            <button class="icon-button" id="csvButton" type="button" title="导出 CSV">CSV</button>
+            <button class="icon-button" type="button" onclick="window.print()" title="打印">Print</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="workspace" aria-label="生成结果">
+        <div class="summary-strip">
+          <div>
+            <span id="monthLabel">June 2026</span>
+            <strong id="postCount">0 posts</strong>
+          </div>
+          <div>
+            <span>CTA</span>
+            <strong>011-2312 8188</strong>
+          </div>
+          <div>
+            <span>Outlet</span>
+            <strong>L1-119</strong>
+          </div>
+        </div>
+
+        <div class="calendar-wrap">
+          <div class="calendar-head">
+            <span>Mon</span>
+            <span>Tue</span>
+            <span>Wed</span>
+            <span>Thu</span>
+            <span>Fri</span>
+            <span>Sat</span>
+            <span>Sun</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div class="content-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Channel</th>
+                <th>Content Angle</th>
+                <th>Hook / Caption</th>
+                <th>Visual Direction</th>
+                <th>CTA</th>
+              </tr>
+            </thead>
+            <tbody id="planTable"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
